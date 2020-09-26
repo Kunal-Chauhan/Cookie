@@ -4,6 +4,7 @@ import speech_recognition as sr
 import random
 import wikipedia
 from gtts import gTTS
+import webbrowser
 import os
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -30,7 +31,7 @@ def wishMe():
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Say something!")
+        print("Listening...")
         r.pause_threshold = 1
         audio = r.listen(source)
 
@@ -74,14 +75,41 @@ def assistantResponse(text):
 
 
 if __name__ == "__main__":
+    audio = takeCommand()
+    response = ''
+    if (wakeWord(audio) == True):
+        # Check for greetings by the user
+        response = response + greeting(audio)
+        assistantResponse(response)
+        response = greeting(audio)
+        assistantResponse(response)
 
+    wishMe()
     while True:
         # Checking for the wake word/phrase
-        query = takeCommand()
-        response = ''
-        if (wakeWord(query) == True):
-            # Check for greetings by the user
-            response = response + greeting(query)
-            assistantResponse(response)
-            response = greeting(query)
-            assistantResponse(response)
+        query = takeCommand().lower()
+
+        if 'open youtube' in query:
+            webbrowser.open("youtube.com")
+        elif 'open google' in query:
+            webbrowser.open("google.com")
+        elif 'open stack overflow' in query:
+            webbrowser.open("stackoverflow.com")
+        elif 'open github' in query:
+            webbrowser.open("github.com")
+        elif 'play music' in query:
+            music_dir = 'C:\\Users\\Khushi\\Music'
+            songs = os.listdir(music_dir)
+            s = random.choice(songs)
+            os.startfile(os.path.join(music_dir, s))
+
+
+'''
+        if 'wikipedia' in query:
+            speak('Searching Wikipedia...')
+            query = query.replace("wikipedia", "")
+            results = wikipedia.summary(query, sentences=2)
+            speak("According to Wikipedia")
+            print(results)
+            speak(results)
+'''
