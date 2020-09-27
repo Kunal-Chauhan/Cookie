@@ -1,5 +1,3 @@
-from time import daylight
-from types import DynamicClassAttribute
 import pyttsx3  # text to speech
 import datetime
 import speech_recognition as sr
@@ -34,6 +32,7 @@ def takeCommand():
     r = sr.Recognizer()  # initialising the recogniser
     with sr.Microphone() as source:  # using mic as source
         print("Listening...")
+        r.adjust_for_ambient_noise(source, duration=1)
         r.pause_threshold = 1  # it will start recognising if no voice input is given for 1 sec
         audio = r.listen(source)
 
@@ -85,8 +84,8 @@ if __name__ == "__main__":
         assistantResponse(response)
 
     wishMe()
-   # while True:
-    if 1:
+    while True:
+
         # Checking for the wake word/phrase
         query = takeCommand().lower()
 
@@ -131,3 +130,7 @@ if __name__ == "__main__":
             speak("According to Wikipedia")
             print(results)
             speak(results)
+
+        elif 'thank you' in query:
+            speak('you are welcome!')
+            break
