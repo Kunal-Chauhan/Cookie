@@ -16,7 +16,7 @@ def speak(audio):
     engine.runAndWait()  # to make the speech audible
 
 
-def wishMe():
+def wish():
     hour = int(datetime.datetime.now().hour)  # will give the current hour 1-24
     if hour >= 0 and hour < 12:
         speak("Good Morning!")
@@ -28,7 +28,7 @@ def wishMe():
     speak(" How may I assist you?")
 
 
-def takeCommand():
+def takeAudio():
     r = sr.Recognizer()  # initialising the recogniser
     with sr.Microphone() as source:  # using mic as source
         print("Listening...")
@@ -76,14 +76,14 @@ def assistantResponse(audio):
 
 
 if __name__ == "__main__":
-    audio = takeCommand()
+    audio = takeAudio()
     response = ''
     if (wakeWord(audio) == True):
         # Check for greetings by the user
         response = response + greeting(audio)
         assistantResponse(response)
 
-    wishMe()
+    wish()
     while True:
 
         # Checking for the wake word/phrase
