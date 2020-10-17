@@ -87,7 +87,7 @@ if __name__ == "__main__":
     while True:
 
         # Checking for the wake word/phrase
-        query = takeCommand().lower()
+        query = takeAudio().lower()
 
         if 'open youtube' in query:
             webbrowser.open("youtube.com")
