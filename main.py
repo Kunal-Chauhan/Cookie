@@ -40,7 +40,7 @@ def takeAudio():
         print("recognising...")
         query = r.recognize_google(audio, language='en-in')
         print(f"You said : {query}\n")
-    except Exception as e:  # if error occurs, it will print line 42
+    except Exception as e:  # if error occurs, it will print line 44
         print("Pardon me, please say that again")
         return "None"
     return query
@@ -75,6 +75,15 @@ def assistantResponse(audio):
     speak(audio)
 
 
+def cpu():
+    usage = str(psutil.cpu_percent())
+    speak("CPU is at"+usage)
+
+    battery = psutil.sensors_battery()
+    speak("battery is at")
+    speak(battery.percent)
+
+
 if __name__ == "__main__":
     audio = takeAudio()
     response = ''
@@ -87,7 +96,7 @@ if __name__ == "__main__":
     while True:
 
         # Checking for the wake word/phrase
-        query = takeCommand().lower()
+        query = takeAudio().lower()
 
         if 'open youtube' in query:
             webbrowser.open("youtube.com")
@@ -130,6 +139,9 @@ if __name__ == "__main__":
             speak("According to Wikipedia")
             print(results)
             speak(results)
+
+        elif 'battery' in query:
+            cpu()
 
         elif 'thank you' in query:
             speak('you are welcome!')
