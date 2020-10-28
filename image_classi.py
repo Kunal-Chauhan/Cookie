@@ -3,6 +3,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 from tensorflow.keras import datasets, layers, models
 
+
+def image_resize():
+    from PIL import Image
+    image = Image.open('bmw2.jpg')
+    new_image = image.resize((32, 32))
+    new_image.save('bmw2.jpg')
+
+    print(image.size)
+    print(new_image.size)
+
+
 (training_images, training_labels), (testing_images,
                                      testing_labels) = datasets.cifar10.load_data()
 training_images, testing_images = training_images/255, testing_images/255
@@ -48,7 +59,8 @@ model.save('image_classifier.model')
 """
 model = models.load_model('image_classifier.model')
 
-img = cv.imread('horse.jpg')
+image_resize()
+img = cv.imread('bmw2_result.jpg')
 img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 
 plt.imshow(img, cmap=plt.cm.binary)
