@@ -11,6 +11,7 @@ face_cascade = cv2.CascadeClassifier(
     'cascades/data/haarcascade_frontalface_alt2.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 
+
 current_id = 0
 label_ids = {}
 y_labels = []
@@ -50,4 +51,4 @@ with open("pickles/face-labels.pickle", 'wb') as f:
     pickle.dump(label_ids, f)
 
 recognizer.train(x_train, np.array(y_labels))
-recognizer.save("recognizers/face-trainner.yml")
+recognizer.write("recognizers/face-trainner.yml")

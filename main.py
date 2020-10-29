@@ -6,6 +6,7 @@ import wikipedia
 import webbrowser
 import os
 from datetime import date
+import videoTester
 engine = pyttsx3.init('sapi5')  # sapi5 = speech API, ,helps in recognition
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
@@ -85,6 +86,8 @@ def cpu():
 
 
 if __name__ == "__main__":
+    if videoTester.live() != 1:
+        exit()
     audio = takeAudio()
     response = ''
     if (wakeWord(audio) == True):
