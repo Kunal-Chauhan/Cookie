@@ -9,6 +9,8 @@ from datetime import date
 engine = pyttsx3.init('sapi5')  # sapi5 = speech API, ,helps in recognition
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
+format_dict = {"word": ".docx", "powerpoint": ".pptx", "music": ".mp3", "text": ".txt", "python file": ".py",
+               "jupiter notebook": ".ipynb", "portable document": ".pdf", "pdf": ".pdf", "image": ".jpg", "executable": ".exe", "application": ".exe"}
 
 
 def speak(audio):
@@ -113,79 +115,15 @@ if __name__ == "__main__":
 
         elif 'downloads' in query:
             speak("What would you like to open?")
-            y = takeAudio()
-
+            x = takeAudio()
+            speak("What's the format of your file?")
+            y = takeAudio().lower()
+            f = format_dict[y]
             try:
-                print(y)
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".ppt"
-                os.startfile(path)
-
-            except:
-                print(y.capitalize())
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.ppt"
+                path = "C:\\Users\\Khushi\\Downloads\\"+x+f
                 os.startfile(path)
             except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".pdf"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.pdf"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".mp3"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.mp3"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".jpg"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.jpg"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".png"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.png"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".txt"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.txt"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".pptx"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.pptx"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".doc"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.doc"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".docx"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.docx"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".exe"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.exe"
-                os.startfile(path)
-            except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+y+".py"
-                os.startfile(path)
-            except:
-                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.py"
-                os.startfile(path)
-            else:
-                print("File format not found!")
+                path = "C:\\Users\\Khushi\\Downloads\\"+x.capitalize()+f
 
         elif 'the time' in query:
             Time = datetime.datetime.now().strftime("%H:%M:%S")
