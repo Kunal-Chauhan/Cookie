@@ -87,7 +87,7 @@ if __name__ == "__main__":
     while True:
 
         # Checking for the wake word/phrase
-        query = takeCommand().lower()
+        query = takeAudio().lower()
 
         if 'open youtube' in query:
             webbrowser.open("youtube.com")
@@ -110,6 +110,82 @@ if __name__ == "__main__":
             songs = os.listdir(music_dir)
             s = random.choice(songs)
             os.startfile(os.path.join(music_dir, s))
+
+        elif 'downloads' in query:
+            speak("What would you like to open?")
+            y = takeAudio()
+
+            try:
+                print(y)
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".ppt"
+                os.startfile(path)
+
+            except:
+                print(y.capitalize())
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.ppt"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".pdf"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.pdf"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".mp3"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.mp3"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".jpg"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.jpg"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".png"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.png"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".txt"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.txt"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".pptx"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.pptx"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".doc"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.doc"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".docx"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.docx"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".exe"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.exe"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+y+".py"
+                os.startfile(path)
+            except:
+                path = f"C:\\Users\\Khushi\\Downloads\\{y.capitalize()}.py"
+                os.startfile(path)
+            else:
+                print("File format not found!")
 
         elif 'the time' in query:
             Time = datetime.datetime.now().strftime("%H:%M:%S")
