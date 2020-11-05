@@ -86,8 +86,6 @@ def cpu():
 
 
 if __name__ == "__main__":
-    if videoTester.live() != 1:
-        exit()
     audio = takeAudio()
     response = ''
     if (wakeWord(audio) == True):
@@ -114,7 +112,8 @@ if __name__ == "__main__":
             webbrowser.open("github.com")
 
         elif 'open vs code' in query:
-            path = "C:\\Users\\Khushi\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            y = takeAudio()
+            path = "C:\\Users\\Khushi\\AppData\\Local\\Programs\\Microsoft VS Code\\y"
             os.startfile(path)
 
         elif 'play music' in query:
