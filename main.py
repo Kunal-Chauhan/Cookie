@@ -9,6 +9,8 @@ from datetime import date
 engine = pyttsx3.init('sapi5')  # sapi5 = speech API, ,helps in recognition
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
+format_dict = {"word": ".docx", "powerpoint": ".pptx", "music": ".mp3", "text": ".txt", "python file": ".py",
+               "jupiter notebook": ".ipynb", "portable document": ".pdf", "pdf": ".pdf", "image": ".jpg", "executable": ".exe", "application": ".exe", "video": "mp4"}
 
 
 def speak(audio):
@@ -110,6 +112,75 @@ if __name__ == "__main__":
             songs = os.listdir(music_dir)
             s = random.choice(songs)
             os.startfile(os.path.join(music_dir, s))
+
+        elif 'downloads' in query:
+            speak("What would you like to open?")
+            x = takeAudio()
+            speak("What's the format of your file?")
+            y = takeAudio().lower()
+            f = format_dict[y]
+            try:
+                path = "C:\\Users\\Khushi\\Downloads\\"+x+f
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Downloads\\"+x.capitalize()+f
+                os.startfile(path)
+
+        elif 'documents' in query:
+            speak("What would you like to open?")
+            x = takeAudio()
+            speak("What's the format of your file?")
+            y = takeAudio().lower()
+            f = format_dict[y]
+            try:
+                path = "C:\\Users\\Khushi\\OneDrive\\Documents\\"+x+f
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\OneDrive\\Documents\\"+x.capitalize()+f
+                os.startfile(path)
+
+        elif 'pictures' in query:
+            speak("What would you like to open?")
+            x = takeAudio()
+            try:
+                path = "C:\\Users\\Khushi\\OneDrive\\Pictures\\"+x+".jpg"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\OneDrive\\Pictures\\"+x.capitalize()+".jpg"
+                os.startfile(path)
+
+        elif 'music' in query:
+            speak("What would you like to open?")
+            x = takeAudio()
+            try:
+                path = "C:\\Users\\Khushi\\Music\\"+x+".mp3"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Music\\"+x.capitalize()+".mp3"
+                os.startfile(path)
+
+        elif 'video' in query:
+            speak("What would you like to open?")
+            x = takeAudio()
+            try:
+                path = "C:\\Users\\Khushi\\Videos\\"+x+".mp4"
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\Videos\\"+x.capitalize()+".mp4"
+                os.startfile(path)
+
+        elif 'desktop' in query:
+            speak("What would you like to open?")
+            x = takeAudio()
+            speak("What's the format of your file?")
+            y = takeAudio().lower()
+            f = format_dict[y]
+            try:
+                path = "C:\\Users\\Khushi\\OneDrive\\Desktop\\"+x+f
+                os.startfile(path)
+            except:
+                path = "C:\\Users\\Khushi\\OneDrive\\Desktop\\"+x.capitalize()+f
+                os.startfile(path)
 
         elif 'the time' in query:
             Time = datetime.datetime.now().strftime("%H:%M:%S")
