@@ -14,8 +14,8 @@ engine.setProperty('voice', voices[1].id)
 
 format_dict = {"word": ".docx", "powerpoint": ".pptx", "music": ".mp3", "text": ".txt", "python file": ".py",
                "jupiter notebook": ".ipynb", "portable document": ".pdf", "pdf": ".pdf", "image": ".jpg", "executable": ".exe", "application": ".exe", "video": "mp4"}
-folder_dict = {"documents": "C:\\Users\\Khushi\\OneDrive\\Documents\\", "downloads": "C:\\Users\\Khushi\\Downloads\\", "pictures": "C:\\Users\\Khushi\\OneDrive\\Pictures\\", "desktop": "C:\\Users\\Khushi\\OneDrive\\Desktop\\",
-               "Documents": "C:\\Users\\Khushi\\OneDrive\\Documents\\", "Downloads": "C:\\Users\\Khushi\\Downloads\\", "Pictures": "C:\\Users\\Khushi\\OneDrive\\Pictures\\", "Desktop": "C:\\Users\\Khushi\\OneDrive\\Desktop\\"}
+folder_dict = {"documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "downloads": "C:\\Users\\rismv\\Downloads\\", "pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\",
+               "Documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "Downloads": "C:\\Users\\rismv\\Downloads\\", "Pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "Desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\"}
 
 
 def speak(audio):
@@ -109,11 +109,11 @@ if __name__ == "__main__":
             webbrowser.open("github.com")
 
         elif 'open vs code' in query:
-            path = "C:\\Users\\Khushi\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            path = "C:\\Users\\rismv\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(path)
 
         elif 'play music' in query:
-            music_dir = 'C:\\Users\\Khushi\\Music'
+            music_dir = 'C:\\Users\\rismv\\Music'
             songs = os.listdir(music_dir)
             s = random.choice(songs)
             os.startfile(os.path.join(music_dir, s))
@@ -125,10 +125,10 @@ if __name__ == "__main__":
             y = takeAudio().lower()
             f = format_dict[y]
             try:
-                path = "C:\\Users\\Khushi\\Downloads\\"+x+f
+                path = "C:\\Users\\rismv\\Downloads\\"+x+f
                 os.startfile(path)
             except:
-                path = "C:\\Users\\Khushi\\Downloads\\"+x.capitalize()+f
+                path = "C:\\Users\\rismv\\Downloads\\"+x.capitalize()+f
                 os.startfile(path)
 
         elif 'documents' in query:
@@ -138,40 +138,40 @@ if __name__ == "__main__":
             y = takeAudio().lower()
             f = format_dict[y]
             try:
-                path = "C:\\Users\\Khushi\\OneDrive\\Documents\\"+x+f
+                path = "C:\\Users\\rismv\\OneDrive\\Documents\\"+x+f
                 os.startfile(path)
             except:
-                path = "C:\\Users\\Khushi\\OneDrive\\Documents\\"+x.capitalize()+f
+                path = "C:\\Users\\rismv\\OneDrive\\Documents\\"+x.capitalize()+f
                 os.startfile(path)
 
         elif 'pictures' in query:
             speak("What would you like to open?")
             x = takeAudio()
             try:
-                path = "C:\\Users\\Khushi\\OneDrive\\Pictures\\"+x+".jpg"
+                path = "C:\\Users\\rismv\\OneDrive\\Pictures\\"+x+".jpg"
                 os.startfile(path)
             except:
-                path = "C:\\Users\\Khushi\\OneDrive\\Pictures\\"+x.capitalize()+".jpg"
+                path = "C:\\Users\\rismv\\OneDrive\\Pictures\\"+x.capitalize()+".jpg"
                 os.startfile(path)
 
         elif 'music' in query:
             speak("What would you like to open?")
             x = takeAudio()
             try:
-                path = "C:\\Users\\Khushi\\Music\\"+x+".mp3"
+                path = "C:\\Users\\rismv\\Music\\"+x+".mp3"
                 os.startfile(path)
             except:
-                path = "C:\\Users\\Khushi\\Music\\"+x.capitalize()+".mp3"
+                path = "C:\\Users\\rismv\\Music\\"+x.capitalize()+".mp3"
                 os.startfile(path)
 
         elif 'video' in query:
             speak("What would you like to open?")
             x = takeAudio()
             try:
-                path = "C:\\Users\\Khushi\\Videos\\"+x+".mp4"
+                path = "C:\\Users\\rismv\\Videos\\"+x+".mp4"
                 os.startfile(path)
             except:
-                path = "C:\\Users\\Khushi\\Videos\\"+x.capitalize()+".mp4"
+                path = "C:\\Users\\rismv\\Videos\\"+x.capitalize()+".mp4"
                 os.startfile(path)
 
         elif 'desktop' in query:
@@ -181,10 +181,10 @@ if __name__ == "__main__":
             y = takeAudio().lower()
             f = format_dict[y]
             try:
-                path = "C:\\Users\\Khushi\\OneDrive\\Desktop\\"+x+f
+                path = "C:\\Users\\rismv\\OneDrive\\Desktop\\"+x+f
                 os.startfile(path)
             except:
-                path = "C:\\Users\\Khushi\\OneDrive\\Desktop\\"+x.capitalize()+f
+                path = "C:\\Users\\rismv\\OneDrive\\Desktop\\"+x.capitalize()+f
                 os.startfile(path)
 
         elif 'classify' in query:
