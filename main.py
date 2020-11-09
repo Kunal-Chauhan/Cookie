@@ -5,12 +5,17 @@ import random
 import wikipedia
 import webbrowser
 import os
+
 from datetime import date
+
 engine = pyttsx3.init('sapi5')  # sapi5 = speech API, ,helps in recognition
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
+
 format_dict = {"word": ".docx", "powerpoint": ".pptx", "music": ".mp3", "text": ".txt", "python file": ".py",
                "jupiter notebook": ".ipynb", "portable document": ".pdf", "pdf": ".pdf", "image": ".jpg", "executable": ".exe", "application": ".exe", "video": "mp4"}
+folder_dict = {"documents": "C:\\Users\\Khushi\\OneDrive\\Documents\\", "downloads": "C:\\Users\\Khushi\\Downloads\\", "pictures": "C:\\Users\\Khushi\\OneDrive\\Pictures\\", "desktop": "C:\\Users\\Khushi\\OneDrive\\Desktop\\",
+               "Documents": "C:\\Users\\Khushi\\OneDrive\\Documents\\", "Downloads": "C:\\Users\\Khushi\\Downloads\\", "Pictures": "C:\\Users\\Khushi\\OneDrive\\Pictures\\", "Desktop": "C:\\Users\\Khushi\\OneDrive\\Desktop\\"}
 
 
 def speak(audio):
@@ -181,6 +186,23 @@ if __name__ == "__main__":
             except:
                 path = "C:\\Users\\Khushi\\OneDrive\\Desktop\\"+x.capitalize()+f
                 os.startfile(path)
+
+        elif 'classify' in query:
+            speak("From where would you like to choose your image?")
+            x = takeAudio()
+            speak("What's the name of your image?")
+            y = takeAudio()
+            f = folder_dict[x]
+            try:
+                source = f+y+".jpg"
+                destination = "stored_images\\"+y+".jpg"
+                shutil.copyfile(source, destination)
+                classify(y)
+            except:
+                source = f+y.capitalize()+".jpg"
+                destination = "stored_images\\"+y.capitalize()+".jpg"
+                shutil.copyfile(source, destination)
+                classify(y.capitalize())
 
         elif 'the time' in query:
             Time = datetime.datetime.now().strftime("%H:%M:%S")
