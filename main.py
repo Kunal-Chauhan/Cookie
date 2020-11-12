@@ -5,6 +5,7 @@ import random
 import wikipedia
 import webbrowser
 import os
+import shutil
 
 from datetime import date
 
@@ -15,7 +16,7 @@ engine.setProperty('voice', voices[1].id)
 format_dict = {"word": ".docx", "powerpoint": ".pptx", "music": ".mp3", "text": ".txt", "python file": ".py",
                "jupiter notebook": ".ipynb", "portable document": ".pdf", "pdf": ".pdf", "image": ".jpg", "executable": ".exe", "application": ".exe", "video": "mp4"}
 folder_dict = {"documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "downloads": "C:\\Users\\rismv\\Downloads\\", "pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\",
-               "Documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "Downloads": "C:\\Users\\rismv\\Downloads\\", "Pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "Desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\"}
+               "Documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "Downloads": "C:\\Users\\rismv\\Downloads\\", "Pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "Desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\", "download": "C:\\Users\\rismv\\Downloads\\"}
 
 
 class assistant:
@@ -78,6 +79,76 @@ class assistant:
         print(audio)
         # Convert the text to speech
         self.speak(audio)
+
+    def image_resize(self, y):
+        from PIL import Image
+        image = Image.open("stored_images\\"+y+".jpg")
+        new_image = image.resize((32, 32))
+        new_image.save("stored_images\\"+y+".jpg")
+
+        print(image.size)
+        print(new_image.size)
+
+    def classify(self, y):
+        import cv2 as cv
+        import matplotlib.pyplot as plt
+        import numpy as np
+        from tensorflow.keras import datasets, layers, models
+        (training_images, training_labels), (testing_images,
+                                             testing_labels) = datasets.cifar10.load_data()
+        training_images, testing_images = training_images/255, testing_images/255
+
+        class_names = ['Plane', 'Car', 'Bird', 'Cat',
+                       'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
+
+        """for i in range(16):
+                plt.subplot(4, 4, i + 1)
+                plt.xticks([])
+                plt.yticks([])
+                plt.imshow(training_images[i], cmap=plt.cm.binary)
+                plt.xlabel(class_name[training_labels[i][0]])
+
+            plt.show()
+            """
+        training_images = training_images[:20000]
+        training_labels = training_labels[:20000]
+        testing_images = testing_images[:4000]
+        testing_labels = testing_labels[:4000]
+
+        """model = models.Sequential()
+            model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
+            model.add(layers.MaxPooling2D((2, 2)))
+            model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+            model.add(layers.MaxPooling2D((2, 2)))
+            model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+            model.add(layers.Flatten())
+            model.add(layers.Dense(64, activation='relu'))
+            model.add(layers.Dense(10, activation='softmax'))
+
+            model.compile(optimizer='adam',
+                        loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+            model.fit(training_images, training_labels, epochs=10,
+                    validation_data=(testing_images, testing_labels))
+
+            loss, accuracy = model.evaluate(testing_images, testing_labels)
+            print(f"Loss: {loss}")
+            print(f"Accuracy: {accuracy}")
+
+            model.save('image_classifier.model')
+            """
+        model = models.load_model('image_classifier.model')
+
+        self.image_resize(y)
+        img = cv.imread("stored_images\\"+y+".jpg")
+        img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+
+        plt.imshow(img, cmap=plt.cm.binary)
+        prediction = model.predict(np.array([img])/255)
+        index = np.argmax(prediction)
+        print(f'Prediction is {class_names[index]}')
+        self.speak(f'Prediction is {class_names[index]}')
+        plt.show()
 
     def main(self):
         audio = self.takeAudio()
@@ -187,18 +258,23 @@ class assistant:
             elif 'classify' in query:
                 self.speak("From where would you like to choose your image?")
                 x = self.takeAudio()
+                print("Source is ", x)
                 self.speak("What's the name of your image?")
                 y = self.takeAudio()
+                print("Image name is ", y)
                 f = folder_dict[x]
+                print("Location name is ", f)
                 try:
                     source = f+y+".jpg"
                     destination = "stored_images\\"+y+".jpg"
                     shutil.copyfile(source, destination)
+                    self.speak("I am working on it please wait")
                     self.classify(y)
                 except:
                     source = f+y.capitalize()+".jpg"
                     destination = "stored_images\\"+y.capitalize()+".jpg"
                     shutil.copyfile(source, destination)
+                    self.speak("I am working on it please wait")
                     self.classify(y.capitalize())
 
             elif 'the time' in query:
