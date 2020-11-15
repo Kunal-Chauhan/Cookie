@@ -16,7 +16,8 @@ engine.setProperty('voice', voices[1].id)
 format_dict = {"word": ".docx", "powerpoint": ".pptx", "music": ".mp3", "text": ".txt", "python file": ".py",
                "jupiter notebook": ".ipynb", "portable document": ".pdf", "pdf": ".pdf", "image": ".jpg", "executable": ".exe", "application": ".exe", "video": "mp4"}
 folder_dict = {"documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "downloads": "C:\\Users\\rismv\\Downloads\\", "pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\",
-               "Documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "Downloads": "C:\\Users\\rismv\\Downloads\\", "Pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "Desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\", "download": "C:\\Users\\rismv\\Downloads\\"}
+               "Documents": "C:\\Users\\rismv\\OneDrive\\Documents\\", "Downloads": "C:\\Users\\rismv\\Downloads\\", "Pictures": "C:\\Users\\rismv\\OneDrive\\Pictures\\", "Desktop": "C:\\Users\\rismv\\OneDrive\\Desktop\\", "document": "C:\\Users\\rismv\\OneDrive\\Documents\\", "download": "C:\\Users\\rismv\\Downloads\\", "picture": "C:\\Users\\rismv\\OneDrive\\Pictures\\",
+               "Document": "C:\\Users\\rismv\\OneDrive\\Documents\\", "Download": "C:\\Users\\rismv\\Downloads\\", "Picture": "C:\\Users\\rismv\\OneDrive\\Pictures\\"}
 
 
 class assistant:
