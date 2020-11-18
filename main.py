@@ -6,6 +6,9 @@ import wikipedia
 import webbrowser
 import os
 import shutil
+import pyjokes
+import pyautogui
+import psutil
 
 from datetime import date
 
@@ -80,6 +83,23 @@ class assistant:
         print(audio)
         # Convert the text to speech
         self.speak(audio)
+
+    def joke(self):
+        for i in range(2):
+            self.speak(pyjokes.get_jokes()[i])
+            print(pyjokes.get_jokes()[i])
+
+    def screenshot(self):
+        img = pyautogui.screenshot()
+        img.save("stored_images\\screenshot.png")
+
+    def cpu(self):
+        usage = str(psutil.cpu_percent())
+        self.speak("CPU is at"+usage)
+
+        battery = psutil.sensors_battery()
+        self.speak("battery is at")
+        self.speak(battery.percent)
 
     def image_resize(self, y):
         from PIL import Image
@@ -187,6 +207,20 @@ class assistant:
                 s = random.choice(songs)
                 os.startfile(os.path.join(music_dir, s))
 
+            elif 'joke' in query:
+                self.joke()
+
+            elif 'battery' in query:
+                self.cpu()
+
+            elif 'search' in query:
+                self.speak('What do you want to search for?')
+                search = self.takeAudio()
+                url = 'https://google.com/search?q=' + search
+               # webbrowser.get('chrome').open_new_tab(url)
+                webbrowser.open(url)
+                self.speak('Here is What I found for' + search)
+
             elif 'downloads' in query:
                 self.speak("What would you like to open?")
                 x = self.takeAudio()
@@ -290,6 +324,10 @@ class assistant:
                         "thursday", "friday", "saturday", "sunday"]
                 self.speak(f"It's {days[wd]}, the {date}")
 
+            elif 'screenshot' in query:
+                self.speak("taking screenshot")
+                self.screenshot()
+
             elif 'wikipedia' in query:
                 self.speak('Searching Wikipedia...')
                 query = query.replace("wikipedia", "")
@@ -298,13 +336,20 @@ class assistant:
                 print(results)
                 self.speak(results)
 
+            elif 'location' in query:
+                self.speak('What is the location?')
+                location = self.takeAudio()
+                url = 'https://google.nl/maps/place/' + location + '/&amp;'
+                webbrowser.open(url)
+                self.speak('Here is the location ' + location)
+
             elif 'shutdown' in query:
                 if platform == "win32":
                     os.system('shutdown /p /f')
                 elif platform == "linux" or platform == "linux2" or "darwin":
                     os.system('poweroff')
 
-            elif 'thank you' in query:
+            elif 'thank you' or 'thanks' in query:
                 self.speak('you are welcome!')
                 break
 
