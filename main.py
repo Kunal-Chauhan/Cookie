@@ -299,10 +299,10 @@ class assistant:
                 self.speak(results)
 
             elif 'shutdown' in query:
-            if platform == "win32":
-                os.system('shutdown /p /f')
-            elif platform == "linux" or platform == "linux2" or "darwin":
-                os.system('poweroff')
+                if platform == "win32":
+                    os.system('shutdown /p /f')
+                elif platform == "linux" or platform == "linux2" or "darwin":
+                    os.system('poweroff')
 
             elif 'thank you' in query:
                 self.speak('you are welcome!')
