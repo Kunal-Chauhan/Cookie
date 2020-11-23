@@ -312,11 +312,11 @@ class assistant:
                     self.speak("I am working on it please wait")
                     self.classify(y.capitalize())
 
-            elif 'the time' in query:
+            elif 'time' in query:
                 Time = datetime.datetime.now().strftime("%H:%M:%S")
                 self.speak(f"The time is {Time}")
 
-            elif 'the date' in query:
+            elif 'date' in query:
                 date = datetime.date.today()
                 today = date.today()
                 wd = today.weekday()
